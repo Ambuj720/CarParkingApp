@@ -1,4 +1,6 @@
 
+import os
+import db
 from psutil import users
 from requests import Session
 from db import ParkingSpace,User
@@ -49,6 +51,11 @@ def login():
             flash('invalid form data','danger')    
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return render_template('index')
+
 @app.route('/register',methods=['POST','GET'])
 def register():
     if request.method == "POST":
@@ -67,6 +74,33 @@ def register():
             flash('User added successfully','success')
             return redirect('/register')
     return render_template('register.html')
+
+@app.route('/upload', methods=['GET','POST'])
+def uploadImage():
+    if request.method == 'POST':
+        print(request.files)
+        if 'file' not in request.files:
+            flash('No file uploaded','danger')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('no file selected','danger')
+            return redirect(request.url)
+        if file and file.filename:
+            print(file.filename)
+            filename = file.filename
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename ))
+            upload = upload(img =f"/static/uploads/{filename}", imgtype = os.path.splitext(file.filename)[1],user_id=User.id)
+            db.session.add(upload)
+            db.session.commit()
+            flash('file uploaded and saved','success')
+            session['uploaded_file'] = f"/static/uploads/{filename}"
+            return redirect(request.url)
+        else:
+            flash('wrong file selected, only PNG and JPG images allowed','danger')
+            return redirect(request.url)
+   
+    return render_template('upload.html',title='upload new Image')
 
 
 if __name__ == '__main__':

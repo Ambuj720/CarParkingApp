@@ -1,3 +1,4 @@
+import os
 from enum import unique
 from numpy import integer
 from sqlalchemy.engine import create_engine
@@ -31,6 +32,13 @@ class ParkingSpace(Base):
     def __str__(self):
         return self.title
 
- 
+class Config(object):
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join('app.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ALLOWED_EXTENSIONS = {'png','jpg','jpeg'}
+    UPLOAD_FOLDER = os.path.join(os.getcwd(),"app/static/uploads/")
+
+
 engine = create_engine("sqlite:///Carpark.sqlite",echo = True)
 Base.metadata.create_all(engine)
