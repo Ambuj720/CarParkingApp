@@ -53,7 +53,6 @@ def login():
 
 @app.route('/logout')
 def logout():
-    logout_user()
     return render_template('index')
 
 @app.route('/register',methods=['POST','GET'])
