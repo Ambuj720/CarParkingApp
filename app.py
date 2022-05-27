@@ -53,8 +53,9 @@ def login():
 
 @app.route('/logout')
 def logout():
-    logout_user()
-    return render_template('index')
+    session['is_auth'] = False
+    session.pop('username')
+    return render_template('index.html')
 
 @app.route('/register',methods=['POST','GET'])
 def register():

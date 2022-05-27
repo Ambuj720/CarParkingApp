@@ -1,6 +1,51 @@
 {% extends 'base.html' %}
+{% block css %}
+<style>
+
+body {
+  background-image: url('http://demos.creative-tim.com/paper-kit-2/assets/img/antoine-barres.jpg');
+  font-size: 14px;
+  font-weight: 300;
+  font-family: 'Montserrat', "Helvetica", Arial, sans-serif;
+}
+
+.presentation-title {
+  font-size: 4em;
+  font-weight: 700;
+  margin: 0;
+  color: #FFFFFF;
+  background: #fbf8ec;
+  background: -moz-linear-gradient(top, #FFFFFF 35%, #4e6773 100%);
+  background: -webkit-linear-gradient(top, #FFFFFF 35%, #4e6773 100%);
+  background: linear-gradient(to bottom, #FFFFFF 35%, #4e6773 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+</style>
+{% endblock %}
+
 {% block body %}
-<h1>Darshboard</h1>
+<body>
+    <div class="wrapper">
+        <div class="page-header section-dark">
+            <div class="filter"></div>
+    		<div class="content-center">
+    			<div class="container">
+    				<div class="title-brand">
+    					<h1 class="presentation-title" style="text-align: center;">WELCOME TO SMART PARKING</h1>
+    				<div>
+                        
+                    </div>    
+    				<h2 class="presentation-subtitle text-center"></h2>
+    			</div>
+    		</div>
+            <div class="moving-clouds" style="background-image: url('static/images/park.gif'); ">
+
+            </div>
+    	</div>
+  </div>
+</body>
 {% endblock %}
         
         
