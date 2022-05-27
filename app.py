@@ -1,4 +1,5 @@
 
+from main import start_watching
 import os
 import db
 from psutil import users
@@ -6,7 +7,7 @@ from requests import Session
 from db import ParkingSpace,User
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
-from flask import Flask, render_template, request, flash, redirect,session
+from flask import Flask, jsonify, render_template, request, flash, redirect,session
 
 
 app = Flask(__name__)
@@ -25,6 +26,11 @@ def index():
 @app.route('/startparking')
 def about():
     return render_template('startparking.html')
+
+@app.route('/startparkingapi')
+def start_camera():
+    start_watching()
+    return jsonify({'status':'success'})
 
 @app.route('/uploadImg')
 def contact_us():

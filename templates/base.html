@@ -13,7 +13,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
         integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
         crossorigin="anonymous"></script>
-    {% block css %}{% endblock %}
+    <style>
+        .nav-link{
+    transition: .6 all ease-in-out;
+    border-radius: 10px;
+    }
+
+    .nav-link:hover{
+        background-color: aliceblue;
+    }
+
+    </style>
+    {% block css %}
+
+    
+    {% endblock %}
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-light" style="background-color: rgba(255, 255, 0, 0.614);">
@@ -35,17 +49,15 @@
                     <a class="nav-link active" aria-current="page" href="/startparking">Start Parking</a>
                 </div>
                 <div class="navbar nav">
-                    <a class="nav-link mx-auto text-warning" aria-current="page">Welcome {{session.username}}</a>
+                    <h5>Welcome {{session.username}}</h5>
                     <a class="nav-link mx-auto text-warning" aria-current="page" href="/logout">Logout {{session.username}}</a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
-    {% block body %}
-    
-    
-    {% endblock %}
+    {% block body %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {% block js %}{% endblock %}
 
 
