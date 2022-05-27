@@ -1,9 +1,10 @@
 import os
 from enum import unique
 from numpy import integer
+from psutil import users
 from sqlalchemy.engine import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Float ,DateTime
+from sqlalchemy import Column, ForeignKey, Integer, String, Float ,DateTime
 from datetime import date, datetime
 from sqlalchemy.orm import sessionmaker 
 
@@ -21,16 +22,14 @@ class User(Base):
 
 class ParkingSpace(Base):
     __tablename__ = 'Parking_space'
-    id = Column(Integer,primary_key=True)
-    parking_area = Column(String,unique = True) 
-    free_space= Column(Integer , default = 0)
-    total_space = Column(Integer,default = 0) 
-    reserved_space=Column(Integer,default=0)
-    date= Column(DateTime,default = datetime.now)
-    time  = Column(DateTime,default = datetime.now)
+    id = Column(Integer, primary_key=True)
+    img = Column(String(255))
+    imgtype = Column(String(4))
+   
+    created_on = Column(DateTime, index=True, default=datetime.now)
 
-    def __str__(self):
-        return self.title
+    def __repr__(self):
+        return self.img
 
 
 class Config(object):

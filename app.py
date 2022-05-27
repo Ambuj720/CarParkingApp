@@ -7,6 +7,7 @@ from requests import Session
 from db import ParkingSpace,User
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
+from werkzeug.utils import secure_filename
 from flask import Flask, jsonify, render_template, request, flash, redirect,session
 
 
@@ -83,7 +84,7 @@ def register():
             return redirect('/register')
     return render_template('register.html')
 
-@app.route('/upload', methods=['GET','POST'])
+app.route('/upload', methods=['GET','POST'])
 def uploadImage():
     if request.method == 'POST':
         print(request.files)
@@ -94,22 +95,17 @@ def uploadImage():
         if file.filename == '':
             flash('no file selected','danger')
             return redirect(request.url)
-        if file and file.filename:
+        else:
             print(file.filename)
-            filename = file.filename
+            filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename ))
-            upload = upload(img =f"/static/uploads/{filename}", imgtype = os.path.splitext(file.filename)[1],user_id=User.id)
+            upload = ParkingSpace(img =f"/static/uploads/{filename}", imgtype = os.path.splitext(file.filename)[1],user_id=users.id)
             db.session.add(upload)
             db.session.commit()
             flash('file uploaded and saved','success')
             session['uploaded_file'] = f"/static/uploads/{filename}"
             return redirect(request.url)
-        else:
-            flash('wrong file selected, only PNG and JPG images allowed','danger')
-            return redirect(request.url)
-   
     return render_template('upload.html',title='upload new Image')
-
 
 if __name__ == '__main__':
   app.run(host='127.0.0.1', port=8000, debug=True)
