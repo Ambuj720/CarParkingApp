@@ -56,6 +56,7 @@ def logout():
     session['is_auth'] = False
     session.pop('username')
     return render_template('index.html')
+    return render_template('index')
 
 @app.route('/register',methods=['POST','GET'])
 def register():
