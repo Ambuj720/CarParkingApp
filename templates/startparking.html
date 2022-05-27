@@ -1,5 +1,29 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Start Parking</h1>
-{% endblock body%}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Start Parking</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="submit" id="start">Click to open camera</button>
+        </div>
+    </div>
+</div>
     
+{% endblock body %}
+{% block js %}
+<script>
+    $(function () {
+        $('#start').on('click',()=>{
+            $.get("/startparkingapi", {"data":'empty'},
+                function (data, textStatus, jqXHR) {
+                  console.log(data)  
+                },
+            );
+        })
+    });
+</script>
+{% endblock %}
