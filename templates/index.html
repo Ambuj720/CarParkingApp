@@ -42,6 +42,16 @@ body {
     			</div>
     		</div>
             <div class="moving-clouds" style="background-image: url('static/images/park.gif'); ">
+              
+
+              {% if session.is_auth %}  
+              {% include 'notif.html' %} 
+              {% endif %}
+              
+              
+              
+              
+              
 
             </div>
     	</div>
