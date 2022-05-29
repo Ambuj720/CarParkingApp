@@ -1,4 +1,5 @@
 
+from datetime import datetime
 from main import start_watching
 import os
 import db
@@ -13,7 +14,11 @@ from flask import Flask, jsonify, render_template, request, flash, redirect,sess
 
 app = Flask(__name__)
 
+
 app.secret_key = "ajksdaksj"
+
+UPLOAD_FOLDER = 'static/images'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def opendb():
     engine=create_engine("sqlite:///Carpark.sqlite",echo=True)
@@ -97,13 +102,15 @@ def uploadImage():
             return redirect(request.url)
         else:
             print(file.filename)
+            db = opendb()
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename ))
-            upload = ParkingSpace(img =f"/static/uploads/{filename}", imgtype = os.path.splitext(file.filename)[1],user_id=users.id)
-            db.session.add(upload)
-            db.session.commit()
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            upload = ParkingSpace(img = f"/static/images/{filename}",imgtype = os.path.splitext(file.filename)[1],created_on = datetime.now())
+            db.add(upload)
+            db.commit()
+            db.close()
             flash('file uploaded and saved','success')
-            session['uploaded_file'] = f"/static/uploads/{filename}"
+            session['uploaded_file'] = f"/static/images/{filename}"
             return redirect(request.url)
     return render_template('upload.html',title='upload new Image')
 
