@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from main import start_watching
 import os

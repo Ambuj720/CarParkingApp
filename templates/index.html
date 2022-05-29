@@ -2,49 +2,65 @@
 {% block css %}
 <style>
 
-body {
-  background-image: url('static/images/park.gif');
-  background-repeat: no-repeat;
-  background-size: cover;
+body
+    {
+    width: 100%;
+    height: 100%;
+    background-image:url('static/images/park.gif');
+    background-size: cover;
+    background-attachment:fixed;
+    margin: 0;
+    padding: 0;
+    }
+
+/* ========== DEMO STYLES ========== */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+/* ===== Demo Styles ===== */
+.infobox{
+  font-family: 'Open Sans';
+  font-weight: 400;
   font-size: 14px;
-  font-weight: 300;
-  font-family: 'Montserrat', "Helvetica", Arial, sans-serif;
+  color: #323232;
+  width: 650px;
+  height: auto;
+  margin: 10% auto;
+  padding: 10px;
+  background-color: #c5c5c5;
+  border: 1px solid #f5f5f5;
+  border-radius: 15px;
+  -webkit-box-shadow:  0px 0px 10px 0px #f5f5f5;
+  box-shadow:  0px 0px 10px 0px #f5f5f5;
 }
-
-.title-brand{
-    background-color: rgba(240, 248, 255, 0.478);
-}
-
-.presentation-title {
-  font-size: 4em;
-  font-weight: 700;
-  margin: 0;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color:black;
-}
-
 </style>
 {% endblock %}
 
 {% block body %}
-<body>
-    <div class="wrapper">
-        <div class="page-header section-dark">
-            <div class="filter"></div>
-    		<div class="content-center">
-    			<div class="container">
-    				<div class="title-brand">
-    					<h1 class="presentation-title" style="text-align: center;">WELCOME TO SMART PARKING</h1>
-    				<div>
-                        
-                    </div>    
-    				<h2 class="presentation-subtitle text-center"></h2>
-    			</div>
-    		</div>
-            <div class="moving-clouds" style="background-image: url('static/images/park.gif'); ">
+<div class="infobox">
+  <h2>Welcome to<br>Smart Parking System</h2>
+  <br>
+  <h4>Steps to use the system :</h4>
+   <br>
+  Firstly Register Yourself
+  <br>
+    <br>
+  Then Login to the system and go to Upload Section
+  <br><br>
+  Upload Top view image of your parking and mark the parking slots
+  <br><br>
+  Then go to Start Parking Section and activate it and done..!
+  <br><br>
+  </div>
               
 
               {% if session.is_auth %}  
+
+              
               {% include 'notif.html' %} 
               {% endif %}
               
@@ -53,10 +69,6 @@ body {
               
               
 
-            </div>
-    	</div>
-  </div>
-</body>
 {% endblock %}
         
         
