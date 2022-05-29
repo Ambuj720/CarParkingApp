@@ -84,7 +84,7 @@ def register():
             return redirect('/register')
     return render_template('register.html')
 
-app.route('/upload', methods=['GET','POST'])
+@app.route('/upload', methods=['GET','POST'])
 def uploadImage():
     if request.method == 'POST':
         print(request.files)
