@@ -77,7 +77,7 @@ def start_watching():
         checkSpaces()            # Display Output
     
     
-        cv2.imshow("Image", img)
+        cv2.imshow("Camera Stream", img)
         # cv2.imshow("ImageGray", imgThres)
         # cv2.imshow("ImageBlur", imgBlur)
         key = cv2.waitKey(1)

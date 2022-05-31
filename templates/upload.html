@@ -25,11 +25,27 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-8 mx-auto">
             <div class="card">
+                <div class="card-header">Setup parking locations <a class="" id="launch_setup">Click here to launch editor</a></div>
                 <img class="card-img-top" src="{{session['uploaded_file']}}" alt="" height="400">
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+
+{% block js %}
+<script>
+      $(function () {
+        $('#launch_setup').on('click',()=>{
+            $.get("/setup_parking", {"data":'empty'},
+                function (data, textStatus, jqXHR) {
+                  console.log(data)  
+                },
+            );
+        })
+    });
+</script>
+{% endblock %}
+

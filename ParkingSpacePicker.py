@@ -22,13 +22,18 @@ def mouseClick(events, x, y, flags, params):
     with open('CarParkPos', 'wb') as f:
         pickle.dump(posList, f)
  
- 
-while True:
-    img = cv2.imread('static/images/carParkImg.png')
-    for pos in posList:
-        cv2.rectangle(img, pos, (pos[0] + width, pos[1] + height), (255, 0, 255), 2)
- 
-    cv2.imshow("Image", img)
-    cv2.setMouseCallback("Image", mouseClick)
-    if cv2.waitKey(1) == 27:
-        break
+
+def setup_parking_area(file): 
+    while True:
+        img = cv2.imread(file[1:])
+        for pos in posList:
+            cv2.rectangle(img, pos, (pos[0] + width, pos[1] + height), (255, 0, 255), 2)
+    
+        cv2.imshow("Image", img)
+        cv2.setMouseCallback("Image", mouseClick)
+        if cv2.waitKey(1) == 27:
+            break
+
+    
+    cv2.destroyAllWindows()
+    cv2.release()

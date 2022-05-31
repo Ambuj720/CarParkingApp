@@ -5,6 +5,7 @@ import db
 from psutil import users
 from requests import Session
 from db import ParkingSpace,User
+from ParkingSpacePicker import setup_parking_area
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm import sessionmaker
 from werkzeug.utils import secure_filename
@@ -35,6 +36,11 @@ def about():
 @app.route('/startparkingapi')
 def start_camera():
     start_watching()
+    return jsonify({'status':'success'})
+
+@app.route('/setup_parking')
+def start_parking_link():
+    setup_parking_area(session.get('uploaded_file'))
     return jsonify({'status':'success'})
 
 @app.route('/uploadImg')
